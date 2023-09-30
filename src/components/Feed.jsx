@@ -14,14 +14,13 @@ const Feed = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await FetchFromAPI(`search?part=snippet&q=${selectedCategory}`);
-        const data = await response.json();
+        const data = await FetchFromAPI(`search?part=snippet&q=${selectedCategory}`);
         setVideos(data.items);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
   }, [selectedCategory]);
 
