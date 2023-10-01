@@ -23,7 +23,6 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => {
                 key={category.name}
                 >
                 <span
-                // ternary operator
                 style={{color:category.name === selectedCategory ? 'white' : 'red' , marginRight:'15px'}}
                 >{category.icon}</span>
                 <span>{category.name}</span>
