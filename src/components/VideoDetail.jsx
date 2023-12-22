@@ -17,6 +17,9 @@ const VideoDetail = () => {
     .then((data)=>{setVideoDetail(data.items[0])})
   },[id])
 
+  if(!videoDetail) return <div>Loading...</div>
+  const {snippet: {title, description, channelTitle, publishedAt}, statistics: {viewCount, likeCount, dislikeCount}} = videoDetail;
+
   return (
     <Box minHeight='95vh'>
       <Stack direction={{xs:'column', md:'row'}}>
@@ -25,9 +28,36 @@ const VideoDetail = () => {
             <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`}
             className="react-player" controls
             />
-            <Typography color="#fff"> 
-              {/* {videoDetail.snippet.title} */}
+            <Typography color="#fff" variant='h5' fontWeight={'bold'} p={2}> 
+              {title}
             </Typography>
+            <Stack>
+              <Box p={2} sx={{borderBottom:'1px solid #3d3d3d'}}>
+                <Typography color="#fff" variant='body1' fontWeight={'bold'}> 
+                  {viewCount} views • {publishedAt}
+                </Typography>
+              </Box>
+              <Box p={2} sx={{borderBottom:'1px solid #3d3d3d'}}>
+                <Stack direction='row' spacing={2}>
+                  <Box>
+                    <CheckCircle color='primary' />
+                  </Box>
+                  <Box>
+                    <Typography color="#fff" variant='body1' fontWeight={'bold'}> 
+                      {channelTitle}
+                    </Typography>
+                    <Typography color="#fff" variant='body2' fontWeight={'bold'}> 
+                      {`${likeCount} likes`}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Box>
+              <Box p={2}>
+                <Typography color="#fff" variant='body1'> 
+                  {description}
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Box>
       </Stack>
